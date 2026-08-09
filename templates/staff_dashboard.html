@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Staff Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="sidebar">
+
+<h2>RETURN MY THINGS</h2>
+
+<ul>
+
+<li><a href="#"><i class="bi bi-grid-fill"></i> Dashboard</a></li>
+
+<li>
+    <a href="/verify_items">
+        <i class="bi bi-box-seam"></i> Verify Items
+    </a>
+</li>
+
+<li>
+    <a href="{{ url_for('claim_requests') }}">
+        <i class="bi bi-check2-square"></i> Claim Requests
+    </a>
+</li>
+<li>
+    <a href="/department_items">
+        <i class="bi bi-building"></i>
+        Department Items
+    </a>
+</li>
+
+<li>
+    <a href="/reports">
+        <i class="bi bi-file-earmark-bar-graph"></i>
+        Reports
+    </a>
+</li>
+
+<li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+
+</ul>
+
+</div>
+
+<div class="main-content">
+
+<div class="topbar">
+
+<h3>Staff Dashboard</h3>
+
+<div>
+
+Welcome,
+
+{{ session.staff_name }}
+
+</div>
+
+</div>
+
+<div class="container-fluid">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h3>
+
+Welcome Staff
+
+</h3>
+
+<p>
+
+Verify Lost & Found Items,
+
+Approve Claims,
+
+Manage Department Items
+
+and Generate Reports.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

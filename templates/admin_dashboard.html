@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<h2>
+
+RETURN MY THINGS
+
+</h2>
+
+<ul>
+
+<li>
+
+<a href="/admin_dashboard">
+
+<i class="bi bi-grid-fill"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+<li>
+<a href="/students">
+<i class="bi bi-people-fill"></i>
+
+Manage Students
+
+</a>
+</li>
+
+<li>
+<a href="/staff">
+<i class="bi bi-person-workspace"></i>
+
+Manage Staff
+
+</a>
+</li>
+
+<li>
+    <a href="/admins">
+        <i class="bi bi-person-gear"></i>
+        Admins
+    </a>
+</li>
+
+<li>
+
+<a href="/lost_items">
+    <i class="bi bi-box-seam"></i>
+    Lost Items
+</a>
+
+</li>
+
+<li>
+    <a href="/found_items">
+        <i class="bi bi-box2-heart-fill"></i>
+        Found Items
+    </a>
+</li>
+
+
+
+<li>
+
+<a href="/logout">
+
+<i class="bi bi-box-arrow-right"></i>
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+<div class="topbar">
+
+<h3>
+
+Admin Dashboard
+
+</h3>
+
+<div>
+
+Welcome,
+
+{{ session.admin_name }}
+
+</div>
+
+</div>
+
+<div class="container-fluid">
+
+<div class="row">
+    <!-- Total Students -->
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <div class="card dashboard-card bg-primary">
+
+        <div class="card-body">
+
+            <h5>Total Students</h5>
+
+            <h2>{{ total_students }}</h2>
+
+            <i class="bi bi-people-fill icon"></i>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Total Staff -->
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <div class="card dashboard-card bg-success">
+
+        <div class="card-body">
+
+            <h5>Total Staff</h5>
+
+            <h2>{{ total_staff }}</h2>
+
+            <i class="bi bi-person-workspace icon"></i>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Lost Items -->
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <div class="card dashboard-card bg-danger">
+
+        <div class="card-body">
+
+            <h5>Lost Items</h5>
+
+            <h2>{{ total_lost }}</h2>
+
+            <i class="bi bi-box-seam icon"></i>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Found Items -->
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <div class="card dashboard-card bg-warning">
+
+        <div class="card-body">
+
+            <h5>Found Items</h5>
+
+            <h2>{{ total_found }}</h2>
+
+            <i class="bi bi-box2-heart-fill icon"></i>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Pending Claims -->
+
+<div class="col-lg-6 mb-4">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h4>Pending Claims</h4>
+
+            <h1>{{ total_claims }}</h1>
+
+            <p>Claims waiting for approval.</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Downloads -->
+
+<div class="col-lg-6 mb-4">
+
+    <div class="card shadow">
+
+        <class="card-body">
+
+            <h4>Downloads</h4>
+
+            <div class="d-grid gap-2">
+
+            <a href="/download_students_report" class="btn btn-success">
+            <i class="bi bi-download"></i>
+            Students.xlsx
+            </a>
+
+            <a href="/download_staff_report" class="btn btn-success">
+            <i class="bi bi-download"></i>
+            Staff.xlsx
+            </a>
+
+            <a href="/download_lost_report" class="btn btn-primary">
+            <i class="bi bi-download"></i>
+            LostItems.xlsx
+            </a>
+
+            <a href="/download_found_report" class="btn btn-primary">
+            <i class="bi bi-download"></i>
+            FoundItems.xlsx
+            </a>
+
+            <a href="/download_monthly_report" class="btn btn-danger">
+            <i class="bi bi-download"></i>
+            MonthlyReport.xlsx
+            </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>   

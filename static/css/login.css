@@ -1,0 +1,167 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f7fb;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+.left-panel{
+    background:linear-gradient(135deg,#0A66C2,#003b73);
+    color:#fff;
+    position:relative;
+}
+
+.overlay{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:60px;
+}
+
+.content h1{
+    font-size:52px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.content h4{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.content p{
+    font-size:18px;
+    line-height:30px;
+    margin-bottom:35px;
+}
+
+.features div{
+    background:rgba(255,255,255,.15);
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:12px;
+    font-size:18px;
+}
+
+.features i{
+    margin-right:10px;
+}
+
+.login-panel{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#eef4fb;
+}
+
+.login-card{
+    width:430px;
+    max-width:100%;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    margin:20px 0;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.login-card h2{
+    color:#0A66C2;
+    font-weight:700;
+}
+
+.login-card p{
+    color:#777;
+}
+.form-label,
+label{
+    font-weight:600;
+    color:#1f2937;
+    margin-bottom:8px;
+}
+
+.form-control,
+.form-select{
+    height:50px;
+    border-radius:10px;
+    border:1px solid #d1d5db;
+    box-shadow:none;
+    transition:.3s;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color:#0A66C2;
+    box-shadow:0 0 8px rgba(10,102,194,.25);
+}
+
+.login-btn{
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:10px;
+    background:#0A66C2;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#084d91;
+    transform:translateY(-2px);
+}
+
+.btn-outline-primary{
+    width:100%;
+    border-radius:10px;
+    height:48px;
+}
+
+a{
+    text-decoration:none;
+    color:#0A66C2;
+    font-weight:500;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+hr{
+    margin:30px 0;
+}
+
+.form-check-label{
+    color:#555;
+}
+
+@media(max-width:992px){
+
+    body{
+        overflow:auto;
+    }
+
+    .login-panel{
+        padding:30px 15px;
+    }
+
+    .login-card{
+        width:100%;
+        max-width:430px;
+    }
+
+}
