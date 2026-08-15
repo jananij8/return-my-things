@@ -31,7 +31,8 @@
               method="POST"
               enctype="multipart/form-data">
             
-            {% if session.get('admin_id') %}
+            {% if session.get('admin_id') and not session.get('student_id') %}
+
             <div class="mb-3">
                 <label class="form-label">Select Student</label>
 
@@ -46,7 +47,10 @@
 
                 </select>
             </div>
-            {% endif %}  
+
+            {% endif %}
+
+                
             <!-- Item Name -->
 
             <div class="mb-3">
@@ -140,11 +144,22 @@
                     Report Lost Item
                 </button>
 
-                <a href="/admin_dashboard"
+                {% if session.get('student_id') %}
+
+                <a href="/student_dashboard"
                    class="btn btn-secondary">
                     <i class="bi bi-arrow-left"></i>
-                    Back to dashboard
+                    Back to Dashboard
                 </a>
+
+                {% elif session.get('admin_id') %}
+
+                <a href="{{ url_for('student_dashboard') if session.get('student_id') else url_for('admin_dashboard') }}"
+                    class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i>
+                     Back to Dashboard
+                </a>
+                {% endif %}
 
             </div>
 

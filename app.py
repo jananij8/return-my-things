@@ -621,7 +621,6 @@ def report_lost():
     # ==========================
     # POST - SAVE LOST ITEM
     # ==========================
-
     if request.method == "POST":
 
         # Student login
@@ -629,29 +628,26 @@ def report_lost():
             student_id = session["student_id"]
 
         # Admin login
-        else:
+        elif "admin_id" in session:
             student_id = request.form.get("student_id")
 
             if not student_id:
                 flash("Please select a student!", "danger")
                 return redirect("/report_lost")
 
-        item_name = request.form["item_name"]
-        category = request.form["category"]
-        description = request.form["description"]
-        lost_location = request.form["lost_location"]
-        lost_date = request.form["lost_date"]
+        item_name = request.form.get("item_name")
+        category = request.form.get("category")
+        description = request.form.get("description")
+        lost_location = request.form.get("lost_location")
+        lost_date = request.form.get("lost_date")
 
         # ==========================
         # IMAGE UPLOAD
         # ==========================
-
         image = request.files.get("item_image")
-
         item_image = None
 
         if image and image.filename:
-
             upload_folder = os.path.join(
                 app.static_folder,
                 "uploads"
@@ -660,20 +656,15 @@ def report_lost():
             os.makedirs(upload_folder, exist_ok=True)
 
             filename = image.filename
-
-            image_path = os.path.join(
-                upload_folder,
-                filename
-            )
+            image_path = os.path.join(upload_folder, filename)
 
             image.save(image_path)
 
             item_image = "uploads/" + filename
 
         # ==========================
-        # INSERT LOST ITEM
+        # INSERT
         # ==========================
-
         cursor.execute("""
             INSERT INTO lost_items
             (
@@ -685,7 +676,7 @@ def report_lost():
                 lost_date,
                 item_image
             )
-            VALUES (%s,%s,%s,%s,%s,%s,%s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (
             student_id,
             item_name,
@@ -697,27 +688,21 @@ def report_lost():
         ))
 
         mysql.connection.commit()
+        cursor.close()
 
-        flash(
-            "Lost Item Reported Successfully!",
-            "success"
-        )
+        flash("Lost Item Reported Successfully!", "success")
 
-        # Admin → Lost Items
         if "admin_id" in session:
             return redirect("/lost_items")
 
-        # Student → My Lost Items
         return redirect("/my_lost_items")
 
     # ==========================
     # GET - ADMIN STUDENT LIST
     # ==========================
-
     students = []
 
     if "admin_id" in session:
-
         cursor.execute("""
             SELECT
                 student_id,
@@ -729,6 +714,8 @@ def report_lost():
 
         students = cursor.fetchall()
 
+    cursor.close()
+
     return render_template(
         "report_lost.html",
         students=students
@@ -736,11 +723,15 @@ def report_lost():
 @app.route("/lost_items")
 def lost_items():
 
+    if "student_id" not in session and "admin_id" not in session and "staff_id" not in session:
+        return redirect("/")
+
     cursor = mysql.connection.cursor()
 
     cursor.execute("SELECT * FROM lost_items")
-
     items = cursor.fetchall()
+
+    cursor.close()
 
     return render_template("lost_items.html", items=items)
 @app.route("/my_lost_items")
@@ -1049,7 +1040,7 @@ def claim_item(lost_id):
 @app.route("/claim_requests")
 def claim_requests():
 
-    if "admin_id" not in session:
+    if "admin_id" not in session and "staff_id" not in session:
         return redirect("/")
 
     cursor = mysql.connection.cursor()
@@ -1228,7 +1219,7 @@ def reports():
 @app.route("/download_lost_report")
 def download_lost_report():
 
-    if "admin_id" not in session:
+    if "admin_id" not in session and "staff_id" not in session:
         return redirect("/")
 
     cursor = mysql.connection.cursor()

@@ -156,8 +156,8 @@
 
     <div class="mt-3">
 
-        <a href="/admin_dashboard"
-           class="btn btn-secondary">
+        <a href="{{ url_for('staff_dashboard') if session.get('staff_id') else url_for('admin_dashboard') }}"
+            class="btn btn-secondary">
 
             <i class="bi bi-arrow-left"></i>
             Back to Dashboard
